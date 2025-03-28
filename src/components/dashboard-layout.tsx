@@ -1,5 +1,4 @@
-// src/components/dashboard-layout.tsx
-"use client"
+'use client'
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
@@ -23,6 +22,8 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
     // Redirect to login page after sign out
     router.push("/login")
   }
+
+  const toggleSidebar = () => setSidebarOpen(!sidebarOpen)
 
   return (
     <div className="flex h-screen bg-gray-50">
@@ -55,8 +56,8 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
       <div className="flex flex-1 flex-col overflow-hidden">
         <header className="flex h-16 items-center justify-between border-b bg-white px-4 md:px-6 shadow-sm">
           <div className="flex items-center">
-            <Button variant="ghost" size="icon" className="mr-2 md:hidden" onClick={() => setSidebarOpen(true)}>
-              <ChevronRight className="h-5 w-5" />
+            <Button variant="ghost" size="icon" className="mr-2 md:hidden" onClick={toggleSidebar}>
+              {sidebarOpen ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
             </Button>
             <h1 className="text-lg font-bold text-[#0C2340] md:text-xl">DSB.Orbit Partner Dashboard</h1>
           </div>
@@ -84,6 +85,7 @@ function SidebarButton({ icon: Icon, label, href }: { icon: any; label: string; 
     </Button>
   )
 }
+
 
 
 

@@ -19,10 +19,8 @@ export default function LoginPage() {
     }
 
     checkSession()
-  }, [router])
 
-  // Listen for auth state changes
-  useEffect(() => {
+    // Listen for auth state changes
     const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
       if (session?.user) {
         router.push('/') // Redirect to dashboard after login
@@ -80,12 +78,13 @@ export default function LoginPage() {
             }
           }}
           providers={[]}
-          redirectTo={process.env.NEXT_PUBLIC_SITE_URL + '/'}
+          redirectTo={process.env.NEXT_PUBLIC_SITE_URL + '/'} // Ensures redirect to the homepage after successful login
         />
       </div>
     </div>
   )
 }
+
 
 
 

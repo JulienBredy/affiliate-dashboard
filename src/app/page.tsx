@@ -167,7 +167,7 @@ export default function HomePage() {
                       <TableCell className="font-medium">{lead.name || '-'}</TableCell>
                       <TableCell>{lead.email || '-'}</TableCell>
                       <TableCell>
-                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${statusColors[lead.status] || 'bg-gray-100 text-gray-800'}`}>
+                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${statusColors[lead.status] || 'bg-gray-100 text-gray-800'}`} >
                           {lead.status}
                         </span>
                       </TableCell>
@@ -184,6 +184,7 @@ export default function HomePage() {
     </DashboardLayout>
   )
 }
+
 
 
 
