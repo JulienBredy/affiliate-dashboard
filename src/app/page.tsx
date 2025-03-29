@@ -1,21 +1,30 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { supabase } from '@/lib/supabaseClient'
 import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 
 import DashboardLayout from '@/components/dashboard-layout'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
-import { Button } from '@/components/ui/button'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+
+// Define the structure of a Lead
+interface Lead {
+  id: string;
+  name: string;
+  email: string;
+  status: string;
+  potential_value: number;
+  created_at: string;
+  partner_id: string;
+}
 
 export default function HomePage() {
   useAuthRedirect() // ✅ This now ONLY listens for real auth changes
 
   const [partner, setPartner] = useState<any>(null)
-  const [leads, setLeads] = useState<any[]>([])
+  const [leads, setLeads] = useState<Lead[]>([]) // Use the correct type here
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -83,7 +92,7 @@ export default function HomePage() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold text-[#0C2340]">€{totalLeadValue.toLocaleString('de-DE')}</div>
-              <p className="text-xs text-muted-foreground">Wert aller Leads mit Status "Abschluss"</p>
+              <p className="text-xs text-muted-foreground">Wert aller Leads mit Status &quot;Abschluss&quot;</p>
             </CardContent>
           </Card>
 
@@ -184,6 +193,10 @@ export default function HomePage() {
     </DashboardLayout>
   )
 }
+
+
+
+
 
 
 
