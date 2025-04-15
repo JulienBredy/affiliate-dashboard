@@ -26,6 +26,7 @@ export default function HomePage() {
   const [partner, setPartner] = useState<any>(null)
   const [leads, setLeads] = useState<Lead[]>([]) // Use the correct type here
   const [loading, setLoading] = useState(true)
+  const [activeStatus, setActiveStatus] = useState<string | null>(null)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,12 +75,16 @@ export default function HomePage() {
   const funnelData = ['Lead', 'Abschluss', 'Verloren'].map(status => ({
     stage: status,
     leads: leads.filter((l) => l.status === status).length,
+    dimmed: activeStatus !== null && activeStatus !== status
   }))
 
   // Calculate total Umsatz for leads with status "Abschluss"
   const totalLeadValue = leads
     .filter((lead) => lead.status === 'Abschluss') // Only include leads with status "Abschluss"
     .reduce((sum, lead) => sum + (lead.potential_value || 0), 0) // Sum their potential values
+
+  const maxLeads = Math.max(...funnelData.map((entry) => entry.leads), 1)
+  const dynamicTickCount = Math.min(maxLeads + 1, 10)
 
   return (
     <DashboardLayout partner={partner}>
@@ -118,7 +123,12 @@ export default function HomePage() {
               <div className="h-[250px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 30, left: 20, bottom: 20 }} barSize={20}>
-                    <XAxis type="number" />
+                    <XAxis 
+                      type="number" 
+                      allowDecimals={false}
+                      tickCount={dynamicTickCount}
+                      label={{ value: 'Leads', position: 'insideBottom', offset: -5, textAnchor: 'middle' }} 
+                    />
                     <YAxis type="category" dataKey="stage" width={100} />
                     <Tooltip
                       content={({ active, payload }) => {
@@ -137,13 +147,10 @@ export default function HomePage() {
                       {funnelData.map((entry) => (
                         <Cell
                           key={`bar-${entry.stage}`}
-                          fill={
-                            entry.stage === 'Lead'
-                              ? '#102C54'
-                              : entry.stage === 'Abschluss'
-                              ? '#13AA6C'
-                              : '#B00020'
-                          }
+                          fill={entry.stage === 'Lead' ? '#102C54' : entry.stage === 'Abschluss' ? '#13AA6C' : '#B00020'}
+                          fillOpacity={entry.dimmed ? 0.5 : 1}
+                          onClick={() => setActiveStatus(entry.stage === activeStatus ? null : entry.stage)}
+                          style={{ cursor: 'pointer' }}
                         />
                       ))}
                     </Bar>
@@ -179,7 +186,11 @@ export default function HomePage() {
                       content={() => (
                         <div className="flex justify-center mt-4 space-x-4 text-sm">
                           {funnelData.map((entry) => (
-                            <div key={entry.stage} className="flex items-center space-x-1">
+                            <div
+                              key={entry.stage}
+                              className={`flex items-center space-x-1 cursor-pointer ${entry.dimmed ? 'opacity-50' : ''}`}
+                              onClick={() => setActiveStatus(entry.stage === activeStatus ? null : entry.stage)}
+                            >
                               <div
                                 className="w-3 h-3 rounded-full"
                                 style={{
@@ -201,13 +212,10 @@ export default function HomePage() {
                       {funnelData.map((entry) => (
                         <Cell
                           key={entry.stage}
-                          fill={
-                            entry.stage === 'Lead'
-                              ? '#102C54'
-                              : entry.stage === 'Abschluss'
-                              ? '#13AA6C'
-                              : '#B00020'
-                          }
+                          fill={entry.stage === 'Lead' ? '#102C54' : entry.stage === 'Abschluss' ? '#13AA6C' : '#B00020'}
+                          fillOpacity={entry.dimmed ? 0.5 : 1}
+                          onClick={() => setActiveStatus(entry.stage === activeStatus ? null : entry.stage)}
+                          style={{ cursor: 'pointer' }}
                         />
                       ))}
                     </Pie>
@@ -243,11 +251,15 @@ export default function HomePage() {
                   </TableRow>
                 ) : (
                   leads.map((lead, index) => (
-                    <TableRow key={index}>
+                    <TableRow key={index} className={activeStatus && lead.status !== activeStatus ? 'opacity-50' : ''}>
                       <TableCell className="font-medium">{lead.name || '-'}</TableCell>
                       <TableCell>{lead.email || '-'}</TableCell>
                       <TableCell>
-                        <span className={`px-2 py-1 text-xs font-medium rounded-full ${statusColors[lead.status] || 'bg-gray-100 text-gray-800'}`} >
+                        <span
+                          onClick={() => setActiveStatus(lead.status === activeStatus ? null : lead.status)}
+                          className={`px-2 py-1 text-xs font-medium rounded-full cursor-pointer transition-opacity hover:opacity-80 ${statusColors[lead.status] || 'bg-gray-100 text-gray-800'}`}
+                          title="Nach diesem Status filtern"
+                        >
                           {lead.status}
                         </span>
                       </TableCell>
