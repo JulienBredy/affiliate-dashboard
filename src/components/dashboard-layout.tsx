@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Home, Users, LogOut, ChevronLeft, ChevronRight } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
@@ -95,10 +95,17 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
 
 function SidebarButton({ icon: Icon, label, href }: { icon: any; label: string; href: string }) {
   const router = useRouter()
+  const pathname = usePathname()
+  const isActive = pathname === href
+
   return (
     <Button
       variant="ghost"
-      className="w-full justify-start rounded-xl text-[var(--sidebar-primary-foreground)] hover:bg-[var(--sidebar-hover-bg)] hover:text-[var(--sidebar-hover-text)] transition-colors"
+      className={`w-full justify-start rounded-xl transition-colors ${
+        isActive
+          ? 'bg-[var(--sidebar-hover-bg)] text-[var(--sidebar-hover-text)] font-semibold'
+          : 'text-[var(--sidebar-primary-foreground)] hover:bg-[var(--sidebar-hover-bg)] hover:text-[var(--sidebar-hover-text)]'
+      }`}
       onClick={() => router.push(href)}
     >
       <Icon className="mr-3 h-5 w-5" />
