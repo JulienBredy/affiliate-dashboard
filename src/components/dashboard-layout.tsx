@@ -45,7 +45,13 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
 
         {/* Bottom section: Only Logout at the bottom now */}
         <div className="p-4 space-y-3">
-          <Button variant="ghost" className="w-full justify-start text-white hover:bg-[#0A1C33] rounded-xl" onClick={handleLogout}>
+          <Button
+            variant="ghost"
+            className="w-full justify-start rounded-xl text-[var(--sidebar-primary-foreground)] hover:bg-[var(--sidebar-hover-bg)] hover:text-[var(--sidebar-hover-text)] transition-colors"
+            onClick={handleLogout}
+            aria-label="Abmelden"
+            title="Abmelden"
+          >
             <LogOut className="mr-3 h-5 w-5" />
             Abmelden
           </Button>
@@ -79,7 +85,11 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
 function SidebarButton({ icon: Icon, label, href }: { icon: any; label: string; href: string }) {
   const router = useRouter()
   return (
-    <Button variant="ghost" className="w-full justify-start text-white hover:bg-[#0A1C33] rounded-xl" onClick={() => router.push(href)}>
+    <Button
+      variant="ghost"
+      className="w-full justify-start rounded-xl text-[var(--sidebar-primary-foreground)] hover:bg-[var(--sidebar-hover-bg)] hover:text-[var(--sidebar-hover-text)] transition-colors"
+      onClick={() => router.push(href)}
+    >
       <Icon className="mr-3 h-5 w-5" />
       {label}
     </Button>

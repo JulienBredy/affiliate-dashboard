@@ -76,6 +76,14 @@
   --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
   --sidebar-border: oklch(0.929 0.013 255.508);
   --sidebar-ring: oklch(0.704 0.04 256.788);
+  --status-lead-bg: #F7F9FD;
+  --status-lead-text: #102C54;
+  --status-abschluss-bg: #E6F3F1;
+  --status-abschluss-text: #13AA6C;
+  --status-verloren-bg: #FFD9DA;
+  --status-verloren-text: #B00020;
+  --sidebar-hover-bg: #2271B3;
+  --sidebar-hover-text: #FFFFFF;
 }
 
 .dark {
