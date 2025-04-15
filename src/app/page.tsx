@@ -120,7 +120,20 @@ export default function HomePage() {
                   <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 30, left: 20, bottom: 20 }} barSize={20}>
                     <XAxis type="number" />
                     <YAxis type="category" dataKey="stage" width={100} />
-                    <Bar dataKey="leads" fill="#0C2340" radius={[0, 4, 4, 0]} />
+                    <Bar dataKey="leads" radius={[0, 4, 4, 0]}>
+                      {funnelData.map((entry) => (
+                        <Cell
+                          key={`bar-${entry.stage}`}
+                          fill={
+                            entry.stage === 'Lead'
+                              ? '#102C54'
+                              : entry.stage === 'Abschluss'
+                              ? '#13AA6C'
+                              : '#B00020'
+                          }
+                        />
+                      ))}
+                    </Bar>
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -138,7 +151,16 @@ export default function HomePage() {
                   <PieChart>
                     <Pie data={funnelData} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="leads">
                       {funnelData.map((entry) => (
-                        <Cell key={entry.stage} fill={entry.stage === 'Lead' ? '#3B82F6' : entry.stage === 'Abschluss' ? '#10B981' : '#EF4444'} />
+                        <Cell
+                          key={entry.stage}
+                          fill={
+                            entry.stage === 'Lead'
+                              ? '#102C54'
+                              : entry.stage === 'Abschluss'
+                              ? '#13AA6C'
+                              : '#B00020'
+                          }
+                        />
                       ))}
                     </Pie>
                   </PieChart>
