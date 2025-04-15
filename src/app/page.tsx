@@ -91,7 +91,7 @@ export default function HomePage() {
               <CardTitle className="text-sm font-medium">Gesamtumsatz</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold text-[#0C2340]">€{totalLeadValue.toLocaleString('de-DE')}</div>
+              <div className="text-2xl font-bold text-[#0C2340]">{totalLeadValue.toLocaleString('de-DE') + '\u00A0€'}</div>
               <p className="text-xs text-muted-foreground">Wert aller Leads mit Status &quot;Abschluss&quot;</p>
             </CardContent>
           </Card>
@@ -181,7 +181,7 @@ export default function HomePage() {
                         </span>
                       </TableCell>
                       <TableCell>{new Date(lead.created_at).toLocaleDateString()}</TableCell>
-                      <TableCell className="text-right">€{lead.potential_value?.toLocaleString('de-DE') || '0'}</TableCell>
+                      <TableCell className="text-right">{(lead.potential_value?.toLocaleString('de-DE') || '0') + '\u00A0€'}</TableCell>
                     </TableRow>
                   ))
                 )}
