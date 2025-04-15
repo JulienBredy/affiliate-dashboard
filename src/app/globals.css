@@ -130,3 +130,26 @@
     @apply bg-background text-foreground font-sans;
   }
 }
+
+/* Override Tailwind Statusfarben */
+
+.bg-green-100 {
+  background-color: var(--status-abschluss-bg);
+}
+.text-green-800 {
+  color: var(--status-abschluss-text);
+}
+
+.bg-green-100[data-status="Abschluss"] {
+  background-color: var(--status-abschluss-bg);
+}
+.text-green-800[data-status="Abschluss"] {
+  color: var(--status-abschluss-text);
+}
+
+.bg-red-100 {
+  background-color: var(--status-verloren-bg);
+}
+.text-red-800 {
+  color: var(--status-verloren-text);
+}
