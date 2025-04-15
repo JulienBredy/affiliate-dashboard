@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "DSB.Orbit Partner Dashboard – Übersicht zu Leads & Umsätzen",
   description: "Statistiken, Kundenstatus und Provisionsübersicht für Partner der dsb Deutsche Sanierungsberatung GmbH.",
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+  },
 };
 
 export default function RootLayout({

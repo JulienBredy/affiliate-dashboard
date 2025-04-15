@@ -85,7 +85,7 @@ export default function HomePage() {
     <DashboardLayout partner={partner}>
       <main className="p-4 md:p-6 space-y-6">
         {/* ✅ TOP SECTION */}
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           <Card className="shadow-sm rounded-2xl">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium">Gesamtumsatz</CardTitle>
@@ -108,7 +108,7 @@ export default function HomePage() {
         </div>
 
         {/* ✅ CHARTS */}
-        <div className="grid gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <Card className="shadow-sm rounded-2xl">
             <CardHeader>
               <CardTitle>Kunden im Funnel</CardTitle>
@@ -193,16 +193,3 @@ export default function HomePage() {
     </DashboardLayout>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-

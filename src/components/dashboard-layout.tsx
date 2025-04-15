@@ -28,7 +28,11 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
   return (
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
-      <div className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#0C2340] transition-transform duration-300 ease-in-out ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} md:relative md:translate-x-0`}>
+      <div
+        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#0C2340] transition-transform duration-300 ease-in-out ${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } md:relative md:translate-x-0`}
+      >
         <div>
           {/* Logo */}
           <div className="bg-white h-16 flex items-center justify-center px-4">
@@ -61,11 +65,18 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
       {/* Main Content */}
       <div className="flex flex-1 flex-col overflow-hidden">
         <header className="flex h-16 items-center justify-between border-b bg-white px-4 md:px-6 shadow-sm">
-          <div className="flex items-center">
-            <Button variant="ghost" size="icon" className="mr-2 md:hidden" onClick={toggleSidebar}>
+          <div className="relative flex items-center">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="mr-2 z-50 md:hidden"
+              onClick={toggleSidebar}
+              aria-label="Sidebar ein-/ausblenden"
+              title="Sidebar ein-/ausblenden"
+            >
               {sidebarOpen ? <ChevronLeft className="h-5 w-5" /> : <ChevronRight className="h-5 w-5" />}
             </Button>
-            <h1 className="text-lg font-bold text-[#0C2340] md:text-xl">DSB.Orbit Partner Dashboard</h1>
+            <h1 className="ml-2 text-lg font-bold text-[#0C2340] md:text-xl">DSB.Orbit Partner Dashboard</h1>
           </div>
           {partner?.partner_id && (
             <div className="bg-[#0C2340] text-white text-sm px-3 py-1 rounded-xl">
@@ -95,11 +106,3 @@ function SidebarButton({ icon: Icon, label, href }: { icon: any; label: string; 
     </Button>
   )
 }
-
-
-
-
-
-
-
-
