@@ -34,7 +34,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="w-full max-w-md space-y-6 bg-white rounded-2xl shadow p-8">
+      <div className="w-full max-w-md space-y-6 bg-white rounded-2xl shadow shadow-[var(--shadow-default)] hover:shadow-[var(--shadow-hover)] transition-shadow p-8">
         <div className="flex flex-col items-center space-y-2">
           <img
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/dsb%20Logo-kK8fRE70odZMbRGWRdHDgPhLfnPnoG.png"
@@ -62,18 +62,33 @@ export default function LoginPage() {
               }
             }
           }}
+          formFields={{
+            email: {
+              autocomplete: 'email',
+            },
+            password: {
+              autocomplete: 'current-password',
+            },
+          }}
           theme="default"
           localization={{
             variables: {
               sign_in: {
                 email_label: 'E-Mail',
+                email_input_placeholder: 'Deine E-Mail-Adresse',
                 password_label: 'Passwort',
+                password_input_placeholder: 'Dein Passwort',
                 button_label: 'Anmelden',
+                link_text: 'Passwort vergessen?',
+                forgot_password_link_text: 'Passwort vergessen?',
               },
               sign_up: {
                 email_label: 'E-Mail',
+                email_input_placeholder: 'Deine E-Mail-Adresse',
                 password_label: 'Passwort',
+                password_input_placeholder: 'Ein sicheres Passwort',
                 button_label: 'Konto erstellen',
+                link_text: 'Noch kein Konto? Jetzt registrieren',
               },
             }
           }}
@@ -84,23 +99,3 @@ export default function LoginPage() {
     </div>
   )
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

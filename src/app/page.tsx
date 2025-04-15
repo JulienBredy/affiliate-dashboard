@@ -86,7 +86,7 @@ export default function HomePage() {
       <main className="p-4 md:p-6 space-y-6">
         {/* ✅ TOP SECTION */}
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <Card className="shadow-sm rounded-2xl">
+          <Card className="shadow-[var(--shadow-default)] hover:shadow-[var(--shadow-hover)] transition-shadow rounded-2xl">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium">Gesamtumsatz</CardTitle>
             </CardHeader>
@@ -96,7 +96,7 @@ export default function HomePage() {
             </CardContent>
           </Card>
 
-          <Card className="shadow-sm rounded-2xl">
+          <Card className="shadow-[var(--shadow-default)] hover:shadow-[var(--shadow-hover)] transition-shadow rounded-2xl">
             <CardHeader className="pb-2">
               <CardTitle className="text-sm font-medium">Vermittelte Leads</CardTitle>
             </CardHeader>
@@ -109,7 +109,7 @@ export default function HomePage() {
 
         {/* ✅ CHARTS */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          <Card className="shadow-sm rounded-2xl">
+          <Card className="shadow-[var(--shadow-default)] hover:shadow-[var(--shadow-hover)] transition-shadow rounded-2xl">
             <CardHeader>
               <CardTitle>Kunden im Funnel</CardTitle>
               <CardDescription>Lead-Verteilung pro Status</CardDescription>
@@ -127,7 +127,7 @@ export default function HomePage() {
             </CardContent>
           </Card>
 
-          <Card className="shadow-sm rounded-2xl">
+          <Card className="shadow-[var(--shadow-default)] hover:shadow-[var(--shadow-hover)] transition-shadow rounded-2xl">
             <CardHeader>
               <CardTitle>Statusübersicht</CardTitle>
               <CardDescription>Verteilung der Leads nach Status</CardDescription>
@@ -149,14 +149,15 @@ export default function HomePage() {
         </div>
 
         {/* ✅ TABLE */}
-        <Card className="mt-6 shadow-sm rounded-2xl">
+        <Card className="mt-6 shadow-[var(--shadow-default)] hover:shadow-[var(--shadow-hover)] transition-shadow rounded-2xl">
           <CardHeader>
             <CardTitle>Kunden</CardTitle>
             <CardDescription>Alle deine Leads</CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
+            <div className="relative w-full overflow-x-auto">
+              <Table>
+                <TableHeader>
                 <TableRow>
                   <TableHead>Name</TableHead>
                   <TableHead>E-mail</TableHead>
@@ -186,7 +187,8 @@ export default function HomePage() {
                   ))
                 )}
               </TableBody>
-            </Table>
+              </Table>
+            </div>
           </CardContent>
         </Card>
       </main>

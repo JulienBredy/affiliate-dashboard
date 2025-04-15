@@ -84,6 +84,8 @@
   --status-verloren-text: #B00020;
   --sidebar-hover-bg: #2271B3;
   --sidebar-hover-text: #FFFFFF;
+  --shadow-default: 0px 5px 30px -10px rgba(0, 0, 0, 0.15);
+  --shadow-hover: 0px 5px 30px 0px rgba(0, 0, 0, 0.15);
 }
 
 .dark {

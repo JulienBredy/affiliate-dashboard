@@ -29,7 +29,7 @@ export default function DashboardLayout({ children, partner }: DashboardLayoutPr
     <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div
-        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#0C2340] transition-transform duration-300 ease-in-out ${
+        className={`fixed inset-y-0 left-0 z-50 flex w-64 flex-col justify-between bg-[#0C2340] shadow-[var(--shadow-default)] transition-shadow transition-transform duration-300 ease-in-out ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } md:relative md:translate-x-0`}
       >
