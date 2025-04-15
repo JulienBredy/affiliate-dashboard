@@ -91,7 +91,7 @@ export default function MeineKundenPage() {
                         </span>
                       </TableCell>
                       <TableCell>{new Date(lead.created_at).toLocaleDateString()}</TableCell>
-                      <TableCell className="text-right">€{lead.potential_value?.toLocaleString('de-DE') || '0'}</TableCell>
+                      <TableCell className="text-right">{(lead.potential_value?.toLocaleString("de-DE") || "0") + "\u00A0€"}</TableCell>
                     </TableRow>
                   ))
                 ) : (
