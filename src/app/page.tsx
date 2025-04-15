@@ -159,7 +159,7 @@ export default function HomePage() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Name</TableHead>
-                  <TableHead>Email</TableHead>
+                  <TableHead>E-mail</TableHead>
                   <TableHead>Status</TableHead>
                   <TableHead>Erstellt am</TableHead>
                   <TableHead className="text-right">Wert</TableHead>
