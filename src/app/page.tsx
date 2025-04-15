@@ -7,7 +7,7 @@ import { useAuthRedirect } from '@/hooks/useAuthRedirect'
 import DashboardLayout from '@/components/dashboard-layout'
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts'
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell, Tooltip, Legend } from 'recharts'
 
 // Define the structure of a Lead
 interface Lead {
@@ -120,6 +120,19 @@ export default function HomePage() {
                   <BarChart data={funnelData} layout="vertical" margin={{ top: 10, right: 30, left: 20, bottom: 20 }} barSize={20}>
                     <XAxis type="number" />
                     <YAxis type="category" dataKey="stage" width={100} />
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (active && payload && payload.length > 0) {
+                          const data = payload[0].payload;
+                          return (
+                            <div className="bg-white px-3 py-1 border rounded text-sm shadow">
+                              {`${data.stage} (${data.leads})`}
+                            </div>
+                          )
+                        }
+                        return null;
+                      }}
+                    />
                     <Bar dataKey="leads" radius={[0, 4, 4, 0]}>
                       {funnelData.map((entry) => (
                         <Cell
@@ -148,7 +161,42 @@ export default function HomePage() {
             <CardContent className="flex flex-col items-center justify-center">
               <div className="h-[200px] w-full">
                 <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
+                  <PieChart className="focus:outline-none">
+                    <Tooltip
+                      content={({ active, payload }) => {
+                        if (active && payload && payload.length > 0) {
+                          const data = payload[0].payload;
+                          return (
+                            <div className="bg-white px-3 py-1 border rounded text-sm shadow">
+                              {`${data.stage} (${data.leads})`}
+                            </div>
+                          )
+                        }
+                        return null;
+                      }}
+                    />
+                    <Legend
+                      content={() => (
+                        <div className="flex justify-center mt-4 space-x-4 text-sm">
+                          {funnelData.map((entry) => (
+                            <div key={entry.stage} className="flex items-center space-x-1">
+                              <div
+                                className="w-3 h-3 rounded-full"
+                                style={{
+                                  backgroundColor:
+                                    entry.stage === 'Lead'
+                                      ? '#102C54'
+                                      : entry.stage === 'Abschluss'
+                                      ? '#13AA6C'
+                                      : '#B00020',
+                                }}
+                              />
+                              <span>{`${entry.stage}`}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    />
                     <Pie data={funnelData} cx="50%" cy="50%" innerRadius={60} outerRadius={80} paddingAngle={5} dataKey="leads">
                       {funnelData.map((entry) => (
                         <Cell
